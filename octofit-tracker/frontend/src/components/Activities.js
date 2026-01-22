@@ -70,7 +70,6 @@ function Activities() {
               <th scope="col">User</th>
               <th scope="col">Activity Type</th>
               <th scope="col">Duration (min)</th>
-              <th scope="col">Distance (km)</th>
               <th scope="col">Calories</th>
               <th scope="col">Date</th>
             </tr>
@@ -81,22 +80,21 @@ function Activities() {
                 <tr key={activity.id}>
                   <th scope="row">{activity.id}</th>
                   <td>
-                    <span className="badge bg-secondary">{activity.user}</span>
+                    <span className="badge bg-secondary">{activity.user_email}</span>
                   </td>
                   <td>
                     <span className="badge bg-info text-dark">{activity.activity_type}</span>
                   </td>
                   <td>{activity.duration}</td>
-                  <td>{activity.distance}</td>
                   <td>
-                    <span className="badge bg-success">{activity.calories_burned}</span>
+                    <span className="badge bg-success">{activity.calories}</span>
                   </td>
                   <td>{new Date(activity.date).toLocaleDateString()}</td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="7" className="text-center py-4">
+                <td colSpan="6" className="text-center py-4">
                   <p className="text-muted mb-0">No activities found</p>
                 </td>
               </tr>

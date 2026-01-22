@@ -126,7 +126,7 @@ function Workouts() {
                 <div className="card-footer bg-light">
                   <div className="d-flex justify-content-between align-items-center">
                     <small className="text-muted">
-                      Created: {new Date(workout.created_at).toLocaleDateString()}
+                      Target: {workout.target_calories} calories
                     </small>
                     <button className="btn btn-sm btn-outline-primary" disabled>
                       Start Workout

@@ -43,10 +43,13 @@ class ActivitySerializer(serializers.ModelSerializer):
 
 class LeaderboardSerializer(serializers.ModelSerializer):
     id = serializers.SerializerMethodField()
+    user = serializers.CharField(source='user_name', read_only=True)
+    total_points = serializers.IntegerField(source='total_calories', read_only=True)
+    activity_count = serializers.IntegerField(source='total_activities', read_only=True)
 
     class Meta:
         model = Leaderboard
-        fields = ['id', 'user_email', 'user_name', 'team', 'total_calories', 'total_activities', 'rank']
+        fields = ['id', 'user_email', 'user_name', 'user', 'team', 'total_calories', 'total_points', 'total_activities', 'activity_count', 'rank']
 
     def get_id(self, obj):
         return str(obj.id) if obj.id else None
