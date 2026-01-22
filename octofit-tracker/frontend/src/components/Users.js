@@ -30,37 +30,77 @@ function Users() {
       });
   }, []);
 
-  if (loading) return <div className="container mt-4"><p>Loading users...</p></div>;
-  if (error) return <div className="container mt-4"><p className="text-danger">Error: {error}</p></div>;
+  if (loading) {
+    return (
+      <div className="container mt-5">
+        <div className="loading-container">
+          <div className="spinner-border text-primary" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  
+  if (error) {
+    return (
+      <div className="container mt-5">
+        <div className="alert alert-danger" role="alert">
+          <h4 className="alert-heading">Error!</h4>
+          <p>{error}</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="container mt-4">
-      <h2>Users</h2>
+    <div className="container mt-5">
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <h1 className="page-header">Users</h1>
+        <button className="btn btn-primary" disabled>
+          <i className="bi bi-person-plus"></i> Add User
+        </button>
+      </div>
+      
       <div className="table-responsive">
-        <table className="table table-striped">
-          <thead>
+        <table className="table table-striped table-hover align-middle">
+          <thead className="table-dark">
             <tr>
-              <th>ID</th>
-              <th>Username</th>
-              <th>Email</th>
-              <th>Team</th>
-              <th>Date Joined</th>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Team</th>
+              <th scope="col">Date Joined</th>
             </tr>
           </thead>
           <tbody>
             {users.length > 0 ? (
               users.map(user => (
                 <tr key={user.id}>
-                  <td>{user.id}</td>
-                  <td>{user.username}</td>
-                  <td>{user.email}</td>
-                  <td>{user.team || 'No team'}</td>
-                  <td>{new Date(user.date_joined).toLocaleDateString()}</td>
+                  <th scope="row">{user.id}</th>
+                  <td>
+                    <strong>{user.name}</strong>
+                  </td>
+                  <td>
+                    <a href={`mailto:${user.email}`} className="link-primary">
+                      {user.email}
+                    </a>
+                  </td>
+                  <td>
+                    {user.team ? (
+                      <span className="badge bg-primary">{user.team}</span>
+                    ) : (
+                      <span className="text-muted">No team</span>
+                    )}
+                  </td>
+                  <td>{new Date(user.created_at).toLocaleDateString()}</td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="5" className="text-center">No users found</td>
+                <td colSpan="5" className="text-center py-4">
+                  <p className="text-muted mb-0">No users found</p>
+                </td>
               </tr>
             )}
           </tbody>

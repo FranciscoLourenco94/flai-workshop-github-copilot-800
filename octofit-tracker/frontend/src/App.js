@@ -12,7 +12,10 @@ function App() {
     <div className="App">
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/">OctoFit Tracker</Link>
+          <Link className="navbar-brand" to="/">
+            <img src="/octofitapp-small.png" alt="OctoFit Logo" className="navbar-logo" />
+            OctoFit Tracker
+          </Link>
           <button 
             className="navbar-toggler" 
             type="button" 
@@ -48,9 +51,19 @@ function App() {
 
       <Routes>
         <Route path="/" element={
-          <div className="container mt-5 text-center">
-            <h1>Welcome to OctoFit Tracker</h1>
-            <p className="lead">Track your fitness activities and compete with your team!</p>
+          <div className="container mt-5">
+            <div className="welcome-section text-center">
+              <h1 className="display-4">Welcome to OctoFit Tracker</h1>
+              <p className="lead">Track your fitness activities and compete with your team!</p>
+              <div className="mt-4">
+                <Link to="/activities" className="btn btn-light btn-lg me-3">
+                  View Activities
+                </Link>
+                <Link to="/leaderboard" className="btn btn-outline-light btn-lg">
+                  See Leaderboard
+                </Link>
+              </div>
+            </div>
           </div>
         } />
         <Route path="/users" element={<Users />} />
